@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Input } from "./components/ui/input";
-import { Button } from "./components/ui/button";
+import { Input } from './components/ui/input';
+import { Button } from './components/ui/button';
+import './App.css'; // Optional: create this if you want additional styling overrides
 
 const supabaseUrl = 'https://olppqgvwgabgtophqwuf.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9scHBxZ3Z3Z2FiZ3RvcGhxd3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgyNDY4MzksImV4cCI6MjA2MzgyMjgzOX0.hD8jsEWDXuLIp8PDKVvQA0QRvCNu741nYFmcnzKAWT8';
@@ -113,12 +114,25 @@ function App() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const Container = ({ children }) => (
+  <div className="relative">
+    <div className="flex justify-center pt-6">
+      <img src="/true-brew-logo-transparency.png" alt="True Brew Logo" className="w-20 drop-shadow-md" />
+    </div>
+    <div className="bg-white border border-gray-300 shadow-xl rounded-2xl p-6 max-w-md mx-auto mt-6">
+      {children}
+    </div>
+  </div>
+);
+
   if (!session) return (
-    <div className="p-6 max-w-md mx-auto text-center">
-      <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-4 w-32" />
-      <h1 className="text-xl font-bold mb-4">{isSignUp ? 'Join True Brew Rewards' : 'True Brew Member Login'}</h1>
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-      <div className="space-y-2">
+    <Container>
+      <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-6 w-32 drop-shadow-md" />
+      <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
+        {isSignUp ? 'Join True Brew Rewards' : 'True Brew Member Login'}
+      </h1>
+      {error && <p className="text-red-600 text-sm mb-4 text-center">{error}</p>}
+      <div className="space-y-3">
         <Input name="email" placeholder="Email" onChange={handleChange} />
         <Input name="password" placeholder="Password" type="password" onChange={handleChange} />
         {isSignUp && (
@@ -128,28 +142,33 @@ function App() {
             <Input name="mobile" placeholder="Mobile Number" onChange={handleChange} />
           </>
         )}
-        <Button className="w-full" onClick={isSignUp ? handleSignUp : handleLogin}>
+        <Button className="w-full text-lg" onClick={isSignUp ? handleSignUp : handleLogin}>
           {isSignUp ? 'Sign Up' : 'Log In'}
         </Button>
-        <p className="text-sm mt-2">
-          {isSignUp ? 'Already a member?' : "Don't have an account?"} <button className="underline" onClick={() => setIsSignUp(!isSignUp)}>{isSignUp ? 'Log In' : 'Sign Up'}</button>
+        <p className="text-sm text-center text-gray-600">
+          {isSignUp ? 'Already a member?' : "Don't have an account?"}{' '}
+          <button className="text-blue-600 underline" onClick={() => setIsSignUp(!isSignUp)}>
+            {isSignUp ? 'Log In' : 'Sign Up'}
+          </button>
         </p>
       </div>
-    </div>
+    </Container>
   );
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-4 w-32" />
-      <h2 className="text-xl font-bold mb-2">Welcome, {profile?.first_name}!</h2>
-      <p><strong>Email:</strong> {profile?.email}</p>
-      <p><strong>Mobile:</strong> {profile?.mobile}</p>
-      <Button className="mt-4" onClick={handleLogout}>Log Out</Button>
+    <Container>
+      <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-6 w-32 drop-shadow-md" />
+      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Welcome, {profile?.first_name}!</h2>
+      <div className="space-y-1 text-center text-gray-700">
+        <p><strong>Email:</strong> {profile?.email}</p>
+        <p><strong>Mobile:</strong> {profile?.mobile}</p>
+      </div>
+      <Button className="mt-4 w-full" onClick={handleLogout}>Log Out</Button>
 
-      <h3 className="mt-6 text-lg font-semibold">Current Specials</h3>
-      <ul className="mt-2 list-disc list-inside">
+      <h3 className="mt-8 text-lg font-semibold text-gray-800">Current Specials</h3>
+      <ul className="mt-3 space-y-2">
         {specials.map(s => (
-          <li key={s.id} className="flex justify-between items-center">
+          <li key={s.id} className="flex justify-between items-center bg-gray-50 px-4 py-2 rounded shadow-sm">
             <span>{s.description}</span>
             {profile?.is_admin && (
               <Button variant="destructive" size="sm" onClick={() => handleDeleteSpecial(s.id)}>Delete</Button>
@@ -159,8 +178,8 @@ function App() {
       </ul>
 
       {profile?.is_admin && (
-        <div className="mt-6">
-          <h4 className="font-semibold">Add New Special</h4>
+        <div className="mt-8">
+          <h4 className="font-semibold text-gray-700">Add New Special</h4>
           <Input
             className="mt-2"
             name="new_special"
@@ -170,15 +189,15 @@ function App() {
           />
           <Button className="mt-2" onClick={handleAddSpecial}>Add Special</Button>
 
-          <h4 className="mt-6 font-semibold">Member Directory</h4>
-          <ul className="mt-2 list-disc list-inside">
+          <h4 className="mt-6 font-semibold text-gray-700">Member Directory</h4>
+          <ul className="mt-2 list-disc list-inside text-sm text-gray-600">
             {members.map(m => (
               <li key={m.user_id}>{m.first_name} {m.last_name} - {m.email} - {m.mobile}</li>
             ))}
           </ul>
         </div>
       )}
-    </div>
+    </Container>
   );
 }
 
