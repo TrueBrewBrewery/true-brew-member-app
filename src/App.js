@@ -118,7 +118,7 @@ function App() {
   <div className="relative">
     <div className="flex justify-center pt-6">
           </div>
-    <div className="bg-white border border-gray-300 shadow-xl rounded-2xl p-6 max-w-md mx-auto mt-6">
+    <div className="bg-white border border-gray-300 shadow-xl rounded-2xl p-4 sm:p-6 max-w-sm w-[92%] sm:w-full mx-auto mt-6">
       {children}
     </div>
   </div>
@@ -127,11 +127,11 @@ function App() {
   if (!session) return (
     <Container>
       <img src="/true-brew-logo-transparency.png" alt="True Brew" style={{ transform: 'scale(0.3)', transformOrigin: 'top center' }} className="mx-auto mb-4 $1" />
-      <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 text-center text-gray-800">
         {isSignUp ? 'Join True Brew Rewards' : 'True Brew Member Login'}
       </h1>
       {error && <p className="text-red-600 text-sm mb-4 text-center">{error}</p>}
-      <div className="space-y-3">
+      <div className="space-y-3 text-sm sm:text-base">
         <Input name="email" placeholder="Email" onChange={handleChange} />
         <Input name="password" placeholder="Password" type="password" onChange={handleChange} />
         {isSignUp && (
@@ -157,14 +157,14 @@ function App() {
   return (
     <Container>
       <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-4 w-[60%] max-w-[250px] drop-shadow-md object-contain" />
-      <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Welcome, {profile?.first_name}!</h2>
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center text-gray-800">Welcome, {profile?.first_name}!</h2>
       <div className="space-y-1 text-center text-gray-700">
         <p><strong>Email:</strong> {profile?.email}</p>
         <p><strong>Mobile:</strong> {profile?.mobile}</p>
       </div>
       <Button className="mt-4 w-full" onClick={handleLogout}>Log Out</Button>
 
-      <h3 className="mt-8 text-lg font-semibold text-gray-800">Current Specials</h3>
+      <h3 className="mt-8 text-base sm:text-lg font-semibold text-gray-800">Current Specials</h3>
       <ul className="mt-3 space-y-2">
         {specials.map(s => (
           <li key={s.id} className="flex justify-between items-center bg-gray-50 px-4 py-2 rounded shadow-sm">
@@ -178,7 +178,7 @@ function App() {
 
       {profile?.is_admin && (
         <div className="mt-8">
-          <h4 className="font-semibold text-gray-700">Add New Special</h4>
+          <h4 className="font-semibold text-sm sm:text-base text-gray-700">Add New Special</h4>
           <Input
             className="mt-2"
             name="new_special"
