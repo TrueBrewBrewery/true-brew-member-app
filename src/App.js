@@ -126,7 +126,7 @@ function App() {
 
   if (!session) return (
     <Container>
-      <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-4 h-8 max-h-10 w-auto object-contain" />
+      <img src="/true-brew-logo-transparency.png" alt="True Brew" style={{ transform: 'scale(0.3)', transformOrigin: 'top center' }} className="mx-auto mb-4 $1" />
       <h1 className="text-2xl font-bold mb-4 text-center text-gray-800">
         {isSignUp ? 'Join True Brew Rewards' : 'True Brew Member Login'}
       </h1>
@@ -156,7 +156,7 @@ function App() {
 
   return (
     <Container>
-      <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-4 w-auto h-10 drop-shadow-md" />
+      <img src="/true-brew-logo-transparency.png" alt="True Brew" className="mx-auto mb-4 w-[60%] max-w-[250px] drop-shadow-md object-contain" />
       <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">Welcome, {profile?.first_name}!</h2>
       <div className="space-y-1 text-center text-gray-700">
         <p><strong>Email:</strong> {profile?.email}</p>
