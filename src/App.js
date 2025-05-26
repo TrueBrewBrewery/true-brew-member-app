@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "./components/ui/input";
+import { Button } from "./components/ui/button";
 
 const supabaseUrl = 'https://olppqgvwgabgtophqwuf.supabase.co';
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9scHBxZ3Z3Z2FiZ3RvcGhxd3VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgyNDY4MzksImV4cCI6MjA2MzgyMjgzOX0.hD8jsEWDXuLIp8PDKVvQA0QRvCNu741nYFmcnzKAWT8';
